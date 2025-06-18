@@ -12,6 +12,10 @@
 pip install -r requirements.txt
 ```
 
+### ffmpeg
+
+解壓縮 ffmpeg.zip 到當前目錄
+
 ### 網頁瀏覽
 
 ```url
