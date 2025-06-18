@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>高雄車流量即時圖</title>
+  <style>
+    body {
+      background: #111;
+      color: white;
+      font-family: sans-serif;
+      margin: 0;
+    }
+    h1 {
+      padding: 1em;
+      font-size: 1.4em;
+    }
+    .map-container {
+      position: relative;
+      width: 100%;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .map-image {
+      width: 100%;
+      display: block;
+    }
+    .marker {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid white;
+      cursor: pointer;
+    }
+    .popup {
+      position: absolute;
+      background: #222;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 0.9em;
+      display: none;
+      z-index: 10;
+    }
+    .popup img {
+      max-width: 200px;
+      display: block;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>📍 高雄車流監測地圖</h1>
+  <div class="map-container">
+    <img src="static/map.jpg" class="map-image" id="baseMap">
+    <div id="markers"></div>
+  </div>
+  <script>
+    const markersEl = document.getElementById("markers");
+    const base = document.getElementById("baseMap");
+
+    const positionMap = {
+      "九如二路、天津街": [450, 90],
+      "九如二路、自立一路": [130, 70],
+      "自立一路、建國三路": [150, 375],
+      "九如二路、重慶街": [540, 100],
+      "站西路": [530, 240],
+      "站西路、建國三路": [545, 370],
+      "站東路南側路口": [640, 380],
+      "站東路": [670, 240],
+      "九如二路、松江路": [680, 110],
+      "建國二路、南華路": [680, 390],
+    };
+
+    async function loadData() {
+      const res = await fetch("static/data/latest.json?ts=" + Date.now());
+      const data = await res.json();
+
+      markersEl.innerHTML = "";
+      data.forEach(item => {
+        const [x, y] = positionMap[item.name] || [0, 0];
+        const count = item.count;
+        const total = Object.values(count).reduce((a, b) => b === "X" ? a : a + b, 0);
+
+        const color = count.car === "X" ? "gray" :
+                      total >= 10 ? "red" :
+                      total >= 5 ? "orange" : "lime";
+
+        const marker = document.createElement("div");
+        marker.className = "marker";
+        marker.style.left = `${x}px`;
+        marker.style.top = `${y}px`;
+        marker.style.background = color;
+
+        const popup = document.createElement("div");
+        popup.className = "popup";
+        popup.style.left = `${x + 20}px`;
+        popup.style.top = `${y}px`;
+
+        const safeName = item.name.replace(/[\s/]/g, "_");
+        popup.innerHTML = `
+          <b>${item.name}</b><br>
+          🚗 car: ${count.car}, 🛻 truck: ${count.truck}, 🚌 bus: ${count.bus}, 🛵 motorcycle: ${count.motorcycle}<br>
+          <img src="static/snapshots/latest/${safeName}.jpg?ts=${Date.now()}">
+        `;
+
+        marker.addEventListener("mouseenter", () => popup.style.display = "block");
+        marker.addEventListener("mouseleave", () => popup.style.display = "none");
+
+        markersEl.appendChild(marker);
+        markersEl.appendChild(popup);
+      });
+    }
+
+    loadData();
+    setInterval(loadData, 30000);
+
+    setTimeout(function() {
+            location.reload();
+        }, 5000); 
+    </script>
+</head>
+
+<body>
+<p>這個頁面會每5秒自動重新整理一次。</p>
+<p>目前的更新時間是：<script>document.write(new Date().toLocaleTimeString());</script></p>
+
+
+</body>
+</html>

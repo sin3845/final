@@ -1,0 +1,102 @@
+[
+  {
+    "name": "九如二路、天津街",
+    "count": {
+      "car": "X",
+      "truck": "X",
+      "bus": "X",
+      "motorcycle": "X"
+    },
+    "timestamp": 1750254959
+  },
+  {
+    "name": "九如二路、自立一路",
+    "count": {
+      "car": 0,
+      "truck": 0,
+      "bus": 0,
+      "motorcycle": 0
+    },
+    "timestamp": 1750254960
+  },
+  {
+    "name": "自立一路、建國三路",
+    "count": {
+      "car": 2,
+      "truck": 1,
+      "bus": 0,
+      "motorcycle": 0
+    },
+    "timestamp": 1750254961
+  },
+  {
+    "name": "九如二路、重慶街",
+    "count": {
+      "car": 2,
+      "truck": 0,
+      "bus": 0,
+      "motorcycle": 0
+    },
+    "timestamp": 1750254962
+  },
+  {
+    "name": "站西路",
+    "count": {
+      "car": 0,
+      "truck": 0,
+      "bus": 0,
+      "motorcycle": 0
+    },
+    "timestamp": 1750254964
+  },
+  {
+    "name": "站西路、建國三路",
+    "count": {
+      "car": "X",
+      "truck": "X",
+      "bus": "X",
+      "motorcycle": "X"
+    },
+    "timestamp": 1750254969
+  },
+  {
+    "name": "站東路南側路口",
+    "count": {
+      "car": 1,
+      "truck": 0,
+      "bus": 0,
+      "motorcycle": 0
+    },
+    "timestamp": 1750254970
+  },
+  {
+    "name": "站東路",
+    "count": {
+      "car": 1,
+      "truck": 0,
+      "bus": 0,
+      "motorcycle": 0
+    },
+    "timestamp": 1750254972
+  },
+  {
+    "name": "九如二路、松江路",
+    "count": {
+      "car": 1,
+      "truck": 0,
+      "bus": 1,
+      "motorcycle": 0
+    },
+    "timestamp": 1750254973
+  },
+  {
+    "name": "建國二路、南華路",
+    "count": {
+      "car": 0,
+      "truck": 0,
+      "bus": 0,
+      "motorcycle": 0
+    },
+    "timestamp": 1750254974
+  }
+]
